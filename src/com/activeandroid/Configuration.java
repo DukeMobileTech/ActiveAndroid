@@ -43,6 +43,7 @@ public class Configuration {
 	private List<Class<? extends TypeSerializer>> mTypeSerializers;
 	private int mCacheSize;
   private String mPassword;
+  private boolean mEncrypted;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -92,6 +93,10 @@ public class Configuration {
     return mPassword;
   }
 
+  public boolean isEncrypted() {
+    return mEncrypted;
+  }
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	// INNER CLASSES
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -124,6 +129,7 @@ public class Configuration {
 		private List<Class<? extends Model>> mModelClasses;
 		private List<Class<? extends TypeSerializer>> mTypeSerializers;
     private String mPassword;
+    private boolean mEncrypted;
 
 		//////////////////////////////////////////////////////////////////////////////////////
 		// CONSTRUCTORS
@@ -183,6 +189,11 @@ public class Configuration {
 
     public Builder setPassword(String password) {
       mPassword = password;
+      return this;
+    }
+
+    public Builder setEncrypted(boolean encrypted) {
+      mEncrypted = encrypted;
       return this;
     }
 

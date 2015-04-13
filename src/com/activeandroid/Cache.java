@@ -46,6 +46,7 @@ public final class Cache {
 	private static boolean sIsInitialized = false;
 
   private static String sPassword;
+  private static boolean sIsEncrypted;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -68,6 +69,7 @@ public final class Cache {
 		sModelInfo = new ModelInfo(configuration);
 		sDatabaseHelper = new DatabaseHelper(configuration);
     sPassword = configuration.getPassword();
+    sIsEncrypted = configuration.isEncrypted();
 
 		// TODO: It would be nice to override sizeOf here and calculate the memory
 		// actually used, however at this point it seems like the reflection
@@ -106,7 +108,11 @@ public final class Cache {
 	}
 
 	public static synchronized SQLiteDatabase openDatabase() {
-		return sDatabaseHelper.getWritableDatabase(sPassword);
+    if (sIsEncrypted) {
+      return sDatabaseHelper.getWritableDatabase(sPassword);
+    } else {
+      return sDatabaseHelper.getWritableDatabase("");
+    }
 	}
 
 	public static synchronized void closeDatabase() {
