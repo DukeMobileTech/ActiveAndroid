@@ -43,7 +43,7 @@ public class Configuration {
 	private List<Class<? extends TypeSerializer>> mTypeSerializers;
 	private int mCacheSize;
   private String mPassword;
-  private boolean mEncrypted;
+  private boolean mEncrypted = false;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
