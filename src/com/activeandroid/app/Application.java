@@ -17,12 +17,14 @@ package com.activeandroid.app;
  */
 
 import com.activeandroid.ActiveAndroid;
+import net.sqlcipher.database.SQLiteDatabase;
 
 public class Application extends android.app.Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		ActiveAndroid.initialize(this);
+    SQLiteDatabase.loadLibs(this);
+		//ActiveAndroid.initialize(this);
 	}
 	
 	@Override

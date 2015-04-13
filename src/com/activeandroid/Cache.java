@@ -19,7 +19,7 @@ package com.activeandroid;
 import java.util.Collection;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase;
 import android.support.v4.util.LruCache;
 
 import com.activeandroid.serializer.TypeSerializer;
@@ -45,6 +45,8 @@ public final class Cache {
 
 	private static boolean sIsInitialized = false;
 
+  private static String sPassword;
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +67,7 @@ public final class Cache {
 		sContext = configuration.getContext();
 		sModelInfo = new ModelInfo(configuration);
 		sDatabaseHelper = new DatabaseHelper(configuration);
+    sPassword = configuration.getPassword();
 
 		// TODO: It would be nice to override sizeOf here and calculate the memory
 		// actually used, however at this point it seems like the reflection
@@ -103,7 +106,7 @@ public final class Cache {
 	}
 
 	public static synchronized SQLiteDatabase openDatabase() {
-		return sDatabaseHelper.getWritableDatabase();
+		return sDatabaseHelper.getWritableDatabase("PASSWORD");
 	}
 
 	public static synchronized void closeDatabase() {

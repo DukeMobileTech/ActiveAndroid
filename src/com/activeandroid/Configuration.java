@@ -42,6 +42,7 @@ public class Configuration {
 	private List<Class<? extends Model>> mModelClasses;
 	private List<Class<? extends TypeSerializer>> mTypeSerializers;
 	private int mCacheSize;
+  private String mPassword;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -87,6 +88,10 @@ public class Configuration {
 		return mModelClasses != null && mModelClasses.size() > 0;
 	}
 
+  public String getPassword() {
+    return mPassword;
+  }
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	// INNER CLASSES
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +123,7 @@ public class Configuration {
 		private String mSqlParser;
 		private List<Class<? extends Model>> mModelClasses;
 		private List<Class<? extends TypeSerializer>> mTypeSerializers;
+    private String mPassword;
 
 		//////////////////////////////////////////////////////////////////////////////////////
 		// CONSTRUCTORS
@@ -175,6 +181,11 @@ public class Configuration {
 			return this;
 		}
 
+    public Builder setPassword(String password) {
+      mPassword = password;
+      return this;
+    }
+
 		public Builder addTypeSerializer(Class<? extends TypeSerializer> typeSerializer) {
 			if (mTypeSerializers == null) {
 				mTypeSerializers = new ArrayList<Class<? extends TypeSerializer>>();
@@ -222,6 +233,12 @@ public class Configuration {
 			} else {
 			    configuration.mSqlParser = getMetaDataSqlParserOrDefault();
 			}
+
+      if (mPassword != null) {
+        configuration.mPassword = mPassword;
+      } else {
+        throw new SecurityException("You must set a password for ActiveAndroid!"); 
+      }
 			
 			// Get model classes from meta-data
 			if (mModelClasses != null) {
