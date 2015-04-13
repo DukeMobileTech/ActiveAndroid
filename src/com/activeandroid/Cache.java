@@ -106,7 +106,7 @@ public final class Cache {
 	}
 
 	public static synchronized SQLiteDatabase openDatabase() {
-		return sDatabaseHelper.getWritableDatabase("PASSWORD");
+		return sDatabaseHelper.getWritableDatabase(sPassword);
 	}
 
 	public static synchronized void closeDatabase() {
