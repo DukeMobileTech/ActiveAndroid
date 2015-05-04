@@ -5,6 +5,19 @@ ActiveAndroid is an active record style ORM ([object relational mapper](http://e
 
 ActiveAndroid does so much more than this though. Accessing the database is a hassle, to say the least, in Android. ActiveAndroid takes care of all the setup and messy stuff, and all with just a few simple steps of configuration.
 
+## Modifications
+
+*This version of ActiveAndroid has been modified to allow encryption of the database based on a password.*
+
+Set the password when initializing, like this:
+
+```java
+  ActiveAndroid.initialize(new Configuration.Builder(getActivity())
+      .setEncrypted(true)
+      .setPassword(decryptionPassword)
+      .create());
+```
+
 ## Download
 
 Grab via Maven:
