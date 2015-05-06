@@ -245,10 +245,12 @@ public class Configuration {
 			    configuration.mSqlParser = getMetaDataSqlParserOrDefault();
 			}
 
-      if (mPassword != null) {
-        configuration.mPassword = mPassword;
-      } else {
-        throw new SecurityException("You must set a password for ActiveAndroid!"); 
+      if (mEncrypted) {
+        if (mPassword != null) {
+          configuration.mPassword = mPassword;
+        } else {
+          throw new SecurityException("You must set a password for ActiveAndroid!"); 
+        }
       }
 			
 			// Get model classes from meta-data
